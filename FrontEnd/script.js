@@ -1,4 +1,5 @@
 const apiUrl = 'http://localhost:5678/api';
+let token = window.localStorage.getItem("authToken");
 
 async function fetchWorks() {
   try {
@@ -70,10 +71,11 @@ async function fetchCategories() {
 function generateCategoriesMenu(categories, projects) {
   const categoriesMenu = document.getElementById('categories-menu');
   categoriesMenu.innerHTML = '';
+  const button = document.createElement('button');
+  button.textContent = "Tous";
+  categoriesMenu.appendChild(button);
 
-  const allCategories = [{ name: 'Tous' },{name: 'Objets'},{name:'Appartements'},{name:'Hotels et restaurants'}];
-
-  allCategories.forEach(category => {
+  categories.forEach(category => {
     const button = document.createElement('button');
     button.textContent = category.name;
     button.addEventListener('click', () => {
@@ -107,5 +109,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const projects = await fetchWorks();
   const categories = await fetchCategories();
   displayWorks(projects);
-  generateCategoriesMenu(categories, projects);
+  if (token === null){
+    generateCategoriesMenu(categories, projects);
+  
+  }
 });
