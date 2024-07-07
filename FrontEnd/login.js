@@ -35,24 +35,15 @@ document.addEventListener('DOMContentLoaded', function() {
           .then(data => {
               if (data.token) {
                   // Stocker le token dans le localStorage ou sessionStorage
-                  sessionStorage.setItem('authToken', data.token);
+                  localStorage.setItem('authToken', data.token);
+                  console.log(data.token);
                   // Réussite de la connexion
                   alert('Connexion réussie ! Redirection...');
                   // Redirection vers une autre page après la connexion réussie
-                  window.location.href = afficherPageAdmin(){const divCategoriesMenu = document.querySelector("#categories-menu");
-                  if (divCategoriesMenu) {
-                    divCategoriesMenu.style.display = "none";
-                  }
-                  const loginButton = document.querySelector(".login-button");
-                  if (loginButton) {
-                    loginButton.textContent = "Logout";
-                    loginButton.addEventListener("click", function() {
-                      localStorage.removeItem("authToken");
-                      window.location.href = "login.html";
-                    });};
-              } else { window.location.href = "index.html";
-                 ;
-                 
+                  window.location.href = 'index.html';
+              } else {
+                  // Affichage d'un message d'erreur si les informations de connexion sont incorrectes
+                  errorMessage.textContent = 'Erreur dans l’identifiant ou le mot de passe.';
               }
           })
           .catch(error => {
