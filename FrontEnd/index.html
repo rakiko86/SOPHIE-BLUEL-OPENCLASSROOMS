@@ -8,6 +8,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<script src="https://kit.fontawesome.com/09b53ef79e.js" crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" href="./assets/style.css">
 	
@@ -19,7 +20,7 @@
 		<ul id="nav-list">
 			<li data-link="projets.html">projets</li>
 			<li data-link="contact.html">contact</li>
-			<li data-link="login.html">login</li>
+			<li class="login-buttun" data-link="login.html">login</li>
 			<li data-link="https://www.instagram.com"><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		  </ul>
 		</ul>
@@ -38,7 +39,19 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<h2 class="mes-projets">Mes Projets</h2>
+
+		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display: none;">
+		<div class="modal-wrapper"></div>
+		<button class="js-modal-close">
+			<i class="fa-solid fa-xmark">
+			</i>
+		</button>
+		
+		<div class="photomodal"></div>
+		<button> Ajouter une photo</button>
+		</aside>
+		
 		<div id="categories-menu"></div>
 		<div class="gallery">
 			<!--Recuperer dynamiquement-->

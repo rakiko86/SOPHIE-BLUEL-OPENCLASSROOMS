@@ -1,0 +1,11 @@
+{
+  "name": "sophie-bluel-openclassrooms",
+  "version": "1.0.0",
+  "description": "Thrird poject of the OpenClassrooms Web Developer Course based on JavaScript programming language",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
