@@ -1,3 +1,4 @@
+
 const apiUrl = 'http://localhost:5678/api';
 let token = window.localStorage.getItem("authToken");
 
@@ -132,5 +133,5 @@ function isUserLoggedIn() {
 function enableAdminMode() {
   document.querySelector(".login").innerText = "Logout";
   
-  // Add the rest of the admin mode functionality here
+ 
 }
