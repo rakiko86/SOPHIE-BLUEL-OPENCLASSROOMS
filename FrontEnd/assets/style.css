@@ -364,7 +364,7 @@ footer{
   }
   .modal h2 {
 	margin-bottom: 10px;
-	font-size: 1.2em;
+	font-size: 1.4em;
 	font-weight: 500;
 	color: black;
 	display: flex;
@@ -381,39 +381,42 @@ footer{
 	font-size: 14px;
 	padding: 10px 25px 10px 25px;
 	margin-bottom: 0;
-	
 	width:30%;
 	margin-left: 35%;
-	margin-top: 20px;
+	margin-top: 10px;
   }
   /* Ajoutez ces règles en bas de votre fichier CSS */
 
   .modal .galerieModal {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
-	grid-template-rows: repeat(3, auto);
-	gap: 10px;
 
-	max-height: 100%;
-	padding: 0px; /* Ajoute un peu de padding pour l'esthétique */
+	gap: 5px;
+
+	height: 100%;
+	 /* Ajoute un peu de padding pour l'esthétique */
   }
   
   .modal .galerieModal figure {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 0;
-	padding: 0;
+	
   }
   
   .modal .galerieModal img {
-	max-width: 50%;
-	height: auto;
+	width: 60%;
+	height: 70%;
 	display: block;
+
   }
-  
-  .modal .galerieModal span {
-	margin-top: 10px;
-	text-align: center;
+  .modal .galerieModal button {
+	position: absolute;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
   }
   
