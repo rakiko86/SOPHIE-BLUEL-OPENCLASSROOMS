@@ -1,6 +1,3 @@
-
-
-
 // Fetch des travaux depuis l'API
 async function fetchWorks() {
     try {
@@ -76,12 +73,16 @@ function generateCategoriesMenu(categories, projects) {
     categoriesMenu.innerHTML = '';
     const button = document.createElement('button');
     button.textContent = "Tous";
+
+    
+    //button.id = category.id;
+
     categoriesMenu.appendChild(button);
 
     categories.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category.name;
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
             filterProjects(category.name, projects);
             setActiveCategory(button);
         });
@@ -103,7 +104,7 @@ function filterProjects(category, projects) {
 
 // Définir la catégorie active
 function setActiveCategory(activeButton) {
-    const buttons = document.querySelectorAll('#categories-menu button');
+    const buttons = document.querySelector('#categories-menu button');
     buttons.forEach(button => {
         button.classList.remove('active');
     });
@@ -136,7 +137,25 @@ function isUserLoggedIn() {
 
 // Activer le mode administrateur
 function enableAdminMode() {
-    document.querySelector(".login").innerText = "Logout";
+     document.querySelector(".login").innerText = "Logout";
+const loginButton = document.getElementById("login-logout");
+//loginButton.innerText = "Logout";
+loginButton.id = "logout-button";
+loginButton.addEventListener('click', handleLogout);
 }
+
+// Gérer la déconnexion
+function handleLogout() {
+    // Supprimer le token (par exemple, depuis le localStorage)
+    localStorage.removeItem('authToken','.modal-btn modal-trigger'); // Assuming 'token' is stored in localStorage
+    // Rediriger vers la page index.html
+    window.location.href = 'index.html'; // Change to your index page URL
+}
+
+// Appel de enableAdminMode() pour s'assurer qu'il est activé
+if (isUserLoggedIn()) {
+    enableAdminMode();
+}
+//enableAdminMode();
 
 

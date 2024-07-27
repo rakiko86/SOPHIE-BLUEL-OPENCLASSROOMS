@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gestion de la connexion
     const loginForm = document.getElementById('login-form');
     const errorMessage = document.getElementById('error-message');
-
+    
 
 
     if (loginForm) {

@@ -1,3 +1,4 @@
+
 const modalContainer = document.querySelector(".modal-container");
 const modalTriggers = document.querySelectorAll(".modal-trigger");
 const galerieModal = document.querySelector(".galerieModal");
@@ -52,7 +53,7 @@ function attachDeleteEvent() {
   deleteProject()
 }
 
-async function deleteProject(event) {
+async function deleteProject(e) {
   const id = e.target.id;
   const init = {
     method: "DELETE",
@@ -71,5 +72,6 @@ async function deleteProject(event) {
   }
 }
 
-displayGalerieModal();
 
+displayGalerieModal();
+ const btnAddModal = document.querrySelector ()

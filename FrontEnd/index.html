@@ -24,7 +24,7 @@
 		<ul id="nav-list">
 			<li data-link="#portfolio">projets</li>
 			<li data-link="#">contact</li>
-			<li data-link="login.html" class="login">login</li>
+			<li data-link="login.html" id="login-logout" class="login">login</li>
 			<li data-link="https://www.instagram.com"><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		  </ul>
 		</ul>
@@ -57,20 +57,46 @@
 		  <button class="addPhoto">Ajouter une photo</button>
 		  
 		</div>
-  
-	  </div>
-  
-	  <button class="modal-btn modal-trigger"><i class="fa-regular fa-pen-to-square"></i>Modifier</button>
-	 
-  
-  
-	
-	
-	
-	<section id="portfolio">
 		
-		<h2 class="projets">Mes Projets</h2>
 
+		<div class="modalAddPhoto">
+			<span><i class="fa-solid fa-arrow-left"></i></span>
+			<span> <i class="fa-solid fa-x"></i></span>
+			 <!-- Formulaire ajout -->
+			<h2>Ajout photo</h2>
+			
+            <div class="content-picture">
+                <i class="fa-regular fa-image picture-user" id="picturePreview"></i>
+                <button class="add-photo">+ Ajouter une photo </button>
+                <p class="file-info">jpg, png : 4mo max</p>
+                <input type="file" accept="images/png, image/jpeg, image/jpg" id="picture" name="picture" style="display:none;">
+            </div>
+        
+            <form class="formAdd" action="">
+                <label for="title">Titre</label>
+                <input type="text" id="title" name="title">
+				<br>
+        
+                <label for="category">Catégorie</label>
+                <select name="category" id="category">
+                    <option value="category" disabled selected style="display:none;"></option>
+                </select>
+                <span id="error-message"></span>
+               
+		<hr class="separator-gallery">
+        
+                <button type="button" name="submit" id="Submit">Valider</button>
+            </form>
+		</div>
+		<hr class="separator-gallery">
+	</div>
+
+
+	<section id="portfolio">
+		<div class="my-project">
+		<h2 class="projets">Mes Projets</h2>
+		<button class="modal-btn modal-trigger"><i class="fa-regular fa-pen-to-square"></i>Modifier</button>
+	</div>
 		<div id="categories-menu"></div>
 		<div class="gallery">
 			<!--Recuperer dynamiquement-->
@@ -98,6 +124,7 @@
 		</ul>
 
 </footer>
+
 
 <script src="script.js"></script>
 <script src="login.js"></script>
