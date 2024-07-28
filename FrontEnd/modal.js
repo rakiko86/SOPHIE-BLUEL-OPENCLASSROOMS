@@ -135,3 +135,42 @@ inputFile.addEventListener("change", () => {
 buttonFile.addEventListener("click", () => {
   inputFile.click();
 });
+
+// Fonction pour obtenir les catégories depuis l'API
+async function getCategories() {
+  try {
+    const response = await fetch('http://localhost:5678/api/categories');
+    if (!response.ok) {
+      throw new Error('Erreur lors de la récupération des catégories');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Erreur:', error);
+    return []; // Retourne un tableau vide en cas d'erreur
+  }
+}
+
+// Fonction pour afficher les catégories dans l'élément select
+async function displayCategoryModal() {
+  const select = document.querySelector(".modalAddPhoto select");
+  
+  // Nettoyer les options existantes
+  select.innerHTML = '';
+
+  const categories = await getCategories();
+  
+  // Vérifier si des catégories ont été récupérées
+  if (categories.length === 0) {
+    console.error('Aucune catégorie disponible');
+    return;
+  }
+  
+  categories.forEach(category => {
+    const option = document.createElement("option");
+    option.value = category.id;
+    option.textContent = category.name;
+    select.appendChild(option);
+  });
+}
+
+displayCategoryModal();
