@@ -74,4 +74,64 @@ async function deleteProject(e) {
 
 
 displayGalerieModal();
- const btnAddModal = document.querrySelector ()
+
+
+//faire apparaitre 2 modale à partir  du bouton ajouter
+const btnAddModal = document.querySelector(".addPhoto");
+const modalAddPhoto = document.querySelector(".modalAddPhoto");
+const arrowLeft = document.querySelector(".fa-arrow-left");
+const modal = document.querySelector(".modal");
+const markAdd = document.querySelector(".fa-x");
+
+function displayAddModal() {
+    btnAddModal.addEventListener("click", () => {
+        modalAddPhoto.style.display = "flex";
+            modal.style.display = "none";
+
+       
+    });
+    arrowLeft.addEventListener("click",()=>{
+        modalAddPhoto.style.display = "none";
+       
+        modal.style.display = "flex";
+
+    });
+    markAdd.addEventListener("click",()=>{
+      modalContainer.style.display = "none"
+    });
+};
+displayAddModal();
+
+// Sélectionner les éléments nécessaires
+const previewImg = document.querySelector("#picturePreview");
+const inputFile = document.querySelector("#picture");
+const buttonFile = document.querySelector(".add-photo");
+const pFile = document.querySelector(".file-info");
+
+// Écouter les changements sur l'input file
+inputFile.addEventListener("change", () => {
+  const file = inputFile.files[0];
+  console.log("file");
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      previewImg.src = e.target.result;
+      previewImg.style.display = "flex"; // Affiche l'image si elle est masquée
+      previewImg.classList.add("image-preview");
+      pFile.style.display = "none";
+    };
+
+    reader.readAsDataURL(file); // Convertir l'image en base64
+
+    pFile.textContent = file.name; // Afficher le nom du fichier
+  } else {
+    alert("Veuillez sélectionner un fichier image (jpg, png, jpeg).");
+  }
+});
+
+// Optionnel: Déclencher l'input file en cliquant sur le bouton
+buttonFile.addEventListener("click", () => {
+  inputFile.click();
+});

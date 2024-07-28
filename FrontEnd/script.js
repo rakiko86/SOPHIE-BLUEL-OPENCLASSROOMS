@@ -104,7 +104,7 @@ function filterProjects(category, projects) {
 
 // Définir la catégorie active
 function setActiveCategory(activeButton) {
-    const buttons = document.querySelector('#categories-menu button');
+    const buttons = document.querySelectorAll('#categories-menu button');
     buttons.forEach(button => {
         button.classList.remove('active');
     });
@@ -156,6 +156,4 @@ function handleLogout() {
 if (isUserLoggedIn()) {
     enableAdminMode();
 }
-//enableAdminMode();
-
-
+enableAdminMode();

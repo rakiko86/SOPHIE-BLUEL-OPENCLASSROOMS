@@ -345,7 +345,7 @@ footer{
 	transform: translate(-50%, calc(-50% - 50px));
 	transition: opacity 0.4s ease-out,
 	transform 0.4s ease-out;
-	display: none;
+	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	
@@ -380,7 +380,7 @@ footer{
 	
   }
    .addPhoto{
-	
+	cursor: pointer;
 	justify-content: center;
 	background-color: #1D6154;
 	color:white;
@@ -428,7 +428,7 @@ footer{
 	flex-direction: row;
   }
   .modalAddPhoto{
-	display:flex;
+	display:none;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
@@ -446,12 +446,14 @@ footer{
 	left: 10px;
 	font-size: 20px;
 	cursor: pointer;
+	cursor: pointer;
   }
 .fa-x{
 	position: absolute;
 	cursor: pointer;
 	top: 40px;
 	right: 10px;
+	cursor: pointer;
 }
 .modalAddPhoto form{
 	display: flex;
@@ -472,6 +474,7 @@ footer{
 	justify-content:center;
 	align-items: center;
 	padding: 5px;
+	border-radius: 5px;
 }
 .add-photo{
 	background-color:rgb(211, 213, 215);
@@ -518,14 +521,14 @@ footer{
 select{
 	padding: 10px 75px 10px 75px;
 	border-color: transparent;
-	border-radius: 3px;
+	border-radius: 5px;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 	
 }
 #title{
 	padding: 10px 75px 10px 75px;
 	border-color: transparent;
-	border-radius: 3px;
+	border-radius: 5px;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
