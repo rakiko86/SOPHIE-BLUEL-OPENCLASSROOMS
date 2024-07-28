@@ -174,3 +174,44 @@ async function displayCategoryModal() {
 }
 
 displayCategoryModal();
+
+// Envoi du formulaire pour ajouter une nouvelle oeuvre
+
+const form = document.querySelector(".modalAddPhoto form");
+const title = document.querySelector(".modalAddPhoto #title");
+const category = document.querySelector(".modalAddPhoto #category");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const file = inputFile.files[0];
+  if (!file) {
+    alert("Veuillez sélectionner un fichier image.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("title", title.value);
+  formData.append("category", category.value);
+  formData.append("image", file);
+
+  try {
+    const response = await fetch(`${apiUrl}/works`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Travail ajouté :", data);
+    displayGalerieModal();
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du travail :", error);
+  }
+});
