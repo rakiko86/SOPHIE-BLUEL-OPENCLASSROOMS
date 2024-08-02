@@ -1,4 +1,5 @@
 // Fetch des travaux depuis l'API
+
 async function fetchWorks() {
     try {
         const response = await fetch(`http://localhost:5678/api/works`, {
@@ -156,4 +157,3 @@ function handleLogout() {
 if (isUserLoggedIn()) {
     enableAdminMode();
 }
-enableAdminMode();

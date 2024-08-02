@@ -1,4 +1,4 @@
-
+localStorage.setItem('authToken', "eyJhbGcOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4");
 const modalContainer = document.querySelector(".modal-container");
 const modalTriggers = document.querySelectorAll(".modal-trigger");
 const galerieModal = document.querySelector(".galerieModal");
@@ -117,10 +117,12 @@ inputFile.addEventListener("change", () => {
     const reader = new FileReader();
 
     reader.onload = function (e) {
-      previewImg.src = e.target.result;
+      previewImg.style.backgroundImage = `url('${e.target.result}')`;
+      previewImg.classList.remove('fa-image');
       previewImg.style.display = "flex"; // Affiche l'image si elle est masquée
-      previewImg.classList.add("image-preview");
+     // previewImg.classList.add("image-preview");
       pFile.style.display = "none";
+      buttonFile.style.display = "none"
     };
 
     reader.readAsDataURL(file); // Convertir l'image en base64
@@ -135,6 +137,7 @@ inputFile.addEventListener("change", () => {
 buttonFile.addEventListener("click", () => {
   inputFile.click();
 });
+
 
 // Fonction pour obtenir les catégories depuis l'API
 async function getCategories() {
@@ -174,44 +177,65 @@ async function displayCategoryModal() {
 }
 
 displayCategoryModal();
-
 // Envoi du formulaire pour ajouter une nouvelle oeuvre
-
-const form = document.querySelector(".modalAddPhoto form");
-const title = document.querySelector(".modalAddPhoto #title");
-const category = document.querySelector(".modalAddPhoto #category");
+const form = document.querySelector(".formAdd");
+const title = document.querySelector("#title");
+const category = document.querySelector("#category");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-
-  const file = inputFile.files[0];
-  if (!file) {
-    alert("Veuillez sélectionner un fichier image.");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append("title", title.value);
-  formData.append("category", category.value);
-  formData.append("image", file);
+  const formData = {
+    title: title.value,
+    categoryId: category.value,
+    imageUrl: previewImg.src,
+    category: {
+      id: category.value,
+      name: category.options[category.selectedIndex].textContent,
+    },
+  };
 
   try {
-    const response = await fetch(`${apiUrl}/works`, {
+    const response = await fetch("http://localhost:5678/api/works/", {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${token}`
+        accept: "application/json",
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
-      body: formData
+      body: JSON.stringify(formData),
     });
-
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new Error('Erreur lors de l\'ajout du projet');
     }
-
-    const data = await response.json();
-    console.log("Travail ajouté :", data);
-    displayGalerieModal();
+    console.log("Le projet a été ajouté avec succès!");
+    await displayGalerieModal();
+    await displayProject();
   } catch (error) {
-    console.error("Erreur lors de l'ajout du travail :", error);
+    console.error('Erreur lors de l\'ajout du projet:', error);
   }
 });
+
+// Fonction qui vérifie si tous les inputs sont remplis
+function FormCompleted() {
+  const buttonValidForm = document.querySelector("#Submit");
+  const form = document.querySelector(".formAdd");
+  const title = document.querySelector("#title");
+  const category = document.querySelector("#category");
+  const inputFile = document.querySelector(".content-picture input");
+
+  form.addEventListener("input", () => {
+    if (
+      title.value !== "" &&
+      category.value !== "" &&
+      inputFile.files.length > 0
+    ) {
+      buttonValidForm.classList.add("valid");
+      buttonValidForm.disabled = false;
+    } else {
+      buttonValidForm.classList.remove("valid");
+      buttonValidForm.disabled = true;
+    }
+  });
+}
+
+FormCompleted();
