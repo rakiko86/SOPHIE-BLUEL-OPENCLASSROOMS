@@ -14,7 +14,7 @@
 	
 </head>
 <body>
-	<div id="bandeau" class="hidden" >
+	<div id="bandeau" class="hidden" style="display: none;" >
 		<p>
 	 <i class="fa-regular fa-pen-to-square"></i>Mode édition</p>
 	</div>
@@ -67,11 +67,15 @@
 			<h2>Ajout photo</h2>
 			<form class="formAdd" action="#">
 			<div class="content-picture">
+				 
                 <span><i class="fa-regular fa-image picture-project" id="picturePreview"></i></span>
-                <label for="file" class="add-photo">+ Ajouter une photo </label>
-                <input type="file" accept="image/png, image/jpeg, image/jpg" id="picture" name="picture" style="display:none;">
-				<img src="#" alt="">
+				
+                <label for="file" class="add-photo">+ Ajouter photo </label>
+                <input type="file" accept="image/png, image/jpeg, image/jpg" id="picture" name="imageUrl" style="display:none;">
+				<img src="" alt="">
 				<p class="file-info">jpg, png : 4mo max</p>
+			
+				
             </div>
         
             
@@ -81,7 +85,7 @@
         
                 <label for="category">Catégorie</label>
                 <select name="category" id="category">
-                  
+                
                 </select>
                 <span id="error-message"></span>
                
@@ -97,7 +101,7 @@
 	<section id="portfolio">
 		<div class="my-project">
 		<h2 class="projets">Mes Projets</h2>
-		<button class="modal-btn modal-trigger"><i class="fa-regular fa-pen-to-square"></i>Modifier</button>
+		<button class="modal-btn modal-trigger" style="display: none;" ><i class="fa-regular fa-pen-to-square"></i>Modifier</button>
 	</div>
 		<div id="categories-menu"></div>
 		<div class="gallery">

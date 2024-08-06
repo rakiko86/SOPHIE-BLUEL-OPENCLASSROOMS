@@ -1,5 +1,3 @@
-// Fetch des travaux depuis l'API
-
 async function fetchWorks() {
     try {
         const response = await fetch(`http://localhost:5678/api/works`, {
@@ -18,7 +16,6 @@ async function fetchWorks() {
     }
 }
 
-// Affichage des travaux
 function displayWorks(works) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Clear existing content
@@ -37,7 +34,6 @@ function displayWorks(works) {
     });
 }
 
-// Trier par catégorie
 function sortByCategory(data) {
     return data.reduce((acc, item) => {
         const categoryName = item.category.name;
@@ -49,7 +45,6 @@ function sortByCategory(data) {
     }, {});
 }
 
-// Fetch des catégories depuis l'API
 async function fetchCategories() {
     try {
         const response = await fetch(`http://localhost:5678/api/categories`, {
@@ -68,16 +63,17 @@ async function fetchCategories() {
     }
 }
 
-// Générer le menu des catégories
 function generateCategoriesMenu(categories, projects) {
     const categoriesMenu = document.getElementById('categories-menu');
-    categoriesMenu.innerHTML = '';
     const button = document.createElement('button');
     button.textContent = "Tous";
+    button.id = "tous";
 
+    button.addEventListener('click', () => {
+        filterProjects('Tous', projects);
+        setActiveCategory(button);
+    });
     
-    //button.id = category.id;
-
     categoriesMenu.appendChild(button);
 
     categories.forEach(category => {
@@ -89,11 +85,13 @@ function generateCategoriesMenu(categories, projects) {
         });
         categoriesMenu.appendChild(button);
     });
+
     const firstButton = categoriesMenu.querySelector('button');
-    firstButton.classList.add('active');
+    if (firstButton) {
+        firstButton.classList.add('active');
+    }
 }
 
-// Filtrer les projets par catégorie
 function filterProjects(category, projects) {
     if (category === 'Tous') {
         displayWorks(projects);
@@ -103,19 +101,15 @@ function filterProjects(category, projects) {
     }
 }
 
-// Définir la catégorie active
 function setActiveCategory(activeButton) {
-    const buttons = document.querySelectorAll('#categories-menu button');
+    const buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
         button.classList.remove('active');
     });
     activeButton.classList.add('active');
 }
 
-// Initialisation de l'application
-document.addEventListener("DOMContentLoaded", () => {
-    initializeApp();
-});
+document.addEventListener("DOMContentLoaded", initializeApp);
 
 async function initializeApp() {
     try {
@@ -131,29 +125,27 @@ async function initializeApp() {
     }
 }
 
-// Vérifier si l'utilisateur est connecté
 function isUserLoggedIn() {
-    return token !== null; // Assuming 'token' is globally defined
+    let token = window.localStorage.getItem('authToken');
+    return token !== null;
 }
 
-// Activer le mode administrateur
 function enableAdminMode() {
-     document.querySelector(".login").innerText = "Logout";
-const loginButton = document.getElementById("login-logout");
-//loginButton.innerText = "Logout";
-loginButton.id = "logout-button";
-loginButton.addEventListener('click', handleLogout);
+    const loginButton = document.getElementById("login-logout");
+    const editMode =document.getElementById("bandeau")
+    const modalBtn = document.querySelector(".modal-btn.modal-trigger")
+    loginButton.innerText = "Logout";
+    loginButton.id = "logout-logout";
+    modalBtn.style.display ="flex";
+    editMode.style.display ="flex";
+    loginButton.addEventListener('click', handleLogout);
 }
 
-// Gérer la déconnexion
 function handleLogout() {
-    // Supprimer le token (par exemple, depuis le localStorage)
-    localStorage.removeItem('authToken','.modal-btn modal-trigger'); // Assuming 'token' is stored in localStorage
-    // Rediriger vers la page index.html
+    localStorage.removeItem('authToken');
     window.location.href = 'index.html'; // Change to your index page URL
 }
 
-// Appel de enableAdminMode() pour s'assurer qu'il est activé
 if (isUserLoggedIn()) {
     enableAdminMode();
 }

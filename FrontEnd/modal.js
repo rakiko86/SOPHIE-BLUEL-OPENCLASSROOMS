@@ -1,9 +1,7 @@
-localStorage.setItem('authToken', "eyJhbGcOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4");
 const modalContainer = document.querySelector(".modal-container");
 const modalTriggers = document.querySelectorAll(".modal-trigger");
 const galerieModal = document.querySelector(".galerieModal");
 const apiUrl = 'http://localhost:5678/api';
-let token = window.localStorage.getItem("authToken");
 
 modalTriggers.forEach(trigger => trigger.addEventListener('click', toggleModal));
 
@@ -50,7 +48,8 @@ function attachDeleteEvent() {
     trash.removeEventListener("click", deleteProject); // Remove existing listener to avoid duplicates
     trash.addEventListener("click", deleteProject);
   });
-  deleteProject()
+.64
+
 }
 
 async function deleteProject(e) {
@@ -66,12 +65,14 @@ async function deleteProject(e) {
       throw new Error('Erreur lors de la suppression du projet');
     }
     console.log("Le projet a été supprimé avec succès!");
+
+    await initializeApp();
     await displayGalerieModal();
   } catch (error) {
     console.error('Erreur lors de la suppression du projet:', error);
   }
 }
-
+ 
 
 displayGalerieModal();
 
@@ -122,7 +123,9 @@ inputFile.addEventListener("change", () => {
       previewImg.style.display = "flex"; // Affiche l'image si elle est masquée
      // previewImg.classList.add("image-preview");
       pFile.style.display = "none";
-      buttonFile.style.display = "none"
+      buttonFile.style.display = "none";
+      inputFile.style.display ="none"
+
     };
 
     reader.readAsDataURL(file); // Convertir l'image en base64
@@ -176,13 +179,15 @@ async function displayCategoryModal() {
   });
 }
 
-displayCategoryModal();
+
 // Envoi du formulaire pour ajouter une nouvelle oeuvre
-const form = document.querySelector(".formAdd");
+const form = document.querySelector(".modalAddPhoto form")
 const title = document.querySelector("#title");
 const category = document.querySelector("#category");
+const submitformButton = document.querySelector("#Submit");
 
-form.addEventListener("submit", async (e) => {
+submitformButton.addEventListener("click", async (e) => {
+  console.log("formvalid");
   e.preventDefault();
   const formData = {
     title: title.value,
@@ -193,7 +198,7 @@ form.addEventListener("submit", async (e) => {
       name: category.options[category.selectedIndex].textContent,
     },
   };
-
+console.log("formData");
   try {
     const response = await fetch("http://localhost:5678/api/works/", {
       method: 'POST',
@@ -209,7 +214,7 @@ form.addEventListener("submit", async (e) => {
     }
     console.log("Le projet a été ajouté avec succès!");
     await displayGalerieModal();
-    await displayProject();
+    await  displayInitializeApp();
   } catch (error) {
     console.error('Erreur lors de l\'ajout du projet:', error);
   }
