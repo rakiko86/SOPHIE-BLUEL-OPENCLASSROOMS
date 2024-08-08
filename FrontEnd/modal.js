@@ -1,7 +1,9 @@
+
 const modalContainer = document.querySelector(".modal-container");
 const modalTriggers = document.querySelectorAll(".modal-trigger");
 const galerieModal = document.querySelector(".galerieModal");
 const apiUrl = 'http://localhost:5678/api';
+let token = window.localStorage.getItem('authToken');
 
 modalTriggers.forEach(trigger => trigger.addEventListener('click', toggleModal));
 
@@ -179,42 +181,47 @@ async function displayCategoryModal() {
   });
 }
 
-
-// Envoi du formulaire pour ajouter une nouvelle oeuvre
-const form = document.querySelector(".modalAddPhoto form")
-const title = document.querySelector("#title");
-const category = document.querySelector("#category");
+displayCategoryModal();
 const submitformButton = document.querySelector("#Submit");
 
+
 submitformButton.addEventListener("click", async (e) => {
+  // Envoi du formulaire pour ajouter une nouvelle oeuvre
+const form = document.querySelector(".modalAddPhoto form")
+const title = document.querySelector("#title").value;
+const category = document.querySelector("#category").value;
+
+const file = document.querySelector("#picture").files[0];
   console.log("formvalid");
   e.preventDefault();
-  const formData = {
-    title: title.value,
-    categoryId: category.value,
-    imageUrl: previewImg.src,
-    category: {
-      id: category.value,
-      name: category.options[category.selectedIndex].textContent,
-    },
-  };
-console.log("formData");
+
+  console.log(file);
+  console.log(title);
+  console.log(category);
+  let formData = new FormData();
+formData.append("image", file);
+formData.append("title", title);
+formData.append("category", category);
+console.log(formData);
+for (let [key, value] of formData.entries()) {
+  console.log(`${key}: ${value}`);
+}
+console.log(token);
   try {
     const response = await fetch("http://localhost:5678/api/works/", {
       method: 'POST',
       headers: {
         accept: "application/json",
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: formData,
     });
     if (!response.ok) {
       throw new Error('Erreur lors de l\'ajout du projet');
     }
     console.log("Le projet a été ajouté avec succès!");
-    await displayGalerieModal();
-    await  displayInitializeApp();
+     displayGalerieModal();
+     initializeApp();
   } catch (error) {
     console.error('Erreur lors de l\'ajout du projet:', error);
   }

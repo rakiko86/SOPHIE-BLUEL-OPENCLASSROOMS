@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
           .then(data => {
               if (data.token) {
                   // Stocker le token dans le localStorage ou sessionStorage
-                  localStorage.setItem('authToken', data.token);
+                  window.localStorage.setItem('authToken', data.token);
                   console.log(data.token);
                   // Réussite de la connexion
                   alert('Connexion réussie ! Redirection...');

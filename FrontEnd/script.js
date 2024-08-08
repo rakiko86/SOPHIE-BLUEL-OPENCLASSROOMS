@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", initializeApp);
 async function initializeApp() {
     try {
         const [projects, categories] = await Promise.all([fetchWorks(), fetchCategories()]);
-        displayWorks(projects);
+        displayWorks(projects, categories);
         if (isUserLoggedIn()) {
             enableAdminMode();
         } else {
@@ -135,7 +135,7 @@ function enableAdminMode() {
     const editMode =document.getElementById("bandeau")
     const modalBtn = document.querySelector(".modal-btn.modal-trigger")
     loginButton.innerText = "Logout";
-    loginButton.id = "logout-logout";
+    loginButton.id = "login-logout";
     modalBtn.style.display ="flex";
     editMode.style.display ="flex";
     loginButton.addEventListener('click', handleLogout);
@@ -149,3 +149,4 @@ function handleLogout() {
 if (isUserLoggedIn()) {
     enableAdminMode();
 }
+initializeApp();
