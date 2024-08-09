@@ -558,8 +558,8 @@ select{
 }
 
 .picture-project {
-	width: 140px;
-    height: 180px;
+	width: 100px;
+    height: 100px;
     background-size: cover;
 }
 .separator-gallery{
