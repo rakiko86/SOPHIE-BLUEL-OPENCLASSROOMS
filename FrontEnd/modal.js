@@ -164,6 +164,12 @@ async function displayCategoryModal() {
   
   // Nettoyer les options existantes
   select.innerHTML = '';
+  // Ajouter une option vide au début
+  const emptyOption = document.createElement("option");
+  emptyOption.value = "";
+  emptyOption.textContent = ""; // Vous pouvez laisser ce texte vide ou ajouter "Sélectionner une catégorie"
+  select.appendChild(emptyOption);
+
 
   const categories = await getCategories();
   
@@ -179,6 +185,7 @@ async function displayCategoryModal() {
     option.textContent = category.name;
     select.appendChild(option);
   });
+  emptyOption.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 displayCategoryModal();
@@ -186,6 +193,7 @@ const submitformButton = document.querySelector("#Submit");
 
 
 submitformButton.addEventListener("click", async (e) => {
+  submitformButton.classList.add("valid")
   // Envoi du formulaire pour ajouter une nouvelle oeuvre
 const form = document.querySelector(".modalAddPhoto form")
 const title = document.querySelector("#title").value;

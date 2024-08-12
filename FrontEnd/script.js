@@ -149,4 +149,3 @@ function handleLogout() {
 if (isUserLoggedIn()) {
     enableAdminMode();
 }
-initializeApp();
