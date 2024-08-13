@@ -193,9 +193,9 @@ const submitformButton = document.querySelector("#Submit");
 
 
 submitformButton.addEventListener("click", async (e) => {
-  submitformButton.classList.add("valid")
+ 
   // Envoi du formulaire pour ajouter une nouvelle oeuvre
-const form = document.querySelector(".modalAddPhoto form")
+
 const title = document.querySelector("#title").value;
 const category = document.querySelector("#category").value;
 
