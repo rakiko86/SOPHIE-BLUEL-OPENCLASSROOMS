@@ -68,7 +68,6 @@ function generateCategoriesMenu(categories, projects) {
     const button = document.createElement('button');
     button.textContent = "Tous";
     button.id = "tous";
-
     button.addEventListener('click', () => {
         filterProjects('Tous', projects);
         setActiveCategory(button);
@@ -134,7 +133,7 @@ function enableAdminMode() {
     const loginButton = document.getElementById("login-logout");
     const editMode =document.getElementById("bandeau")
     const modalBtn = document.querySelector(".modal-btn.modal-trigger")
-    loginButton.innerText = "Logout";
+    loginButton.innerText = "logout";
     loginButton.id = "login-logout";
     modalBtn.style.display ="flex";
     editMode.style.display ="flex";

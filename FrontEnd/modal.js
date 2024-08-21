@@ -50,7 +50,6 @@ function attachDeleteEvent() {
     trash.removeEventListener("click", deleteProject); // Remove existing listener to avoid duplicates
     trash.addEventListener("click", deleteProject);
   });
-.64
 
 }
 
@@ -77,7 +76,6 @@ async function deleteProject(e) {
  
 
 displayGalerieModal();
-
 
 //faire apparaitre 2 modale à partir  du bouton ajouter
 const btnAddModal = document.querySelector(".addPhoto");
@@ -230,10 +228,12 @@ console.log(token);
     console.log("Le projet a été ajouté avec succès!");
      displayGalerieModal();
      initializeApp();
+
   } catch (error) {
     console.error('Erreur lors de l\'ajout du projet:', error);
   }
 });
+
 
 // Fonction qui vérifie si tous les inputs sont remplis
 function FormCompleted() {
@@ -242,18 +242,21 @@ function FormCompleted() {
   const title = document.querySelector("#title");
   const category = document.querySelector("#category");
   const inputFile = document.querySelector(".content-picture input");
+  const img = document.querySelector("#picturePreview")
 
   form.addEventListener("input", () => {
     if (
-      title.value !== "" &&
+      title.value!== "" &&
       category.value !== "" &&
-      inputFile.files.length > 0
+      inputFile.value !== ""
     ) {
       buttonValidForm.classList.add("valid");
       buttonValidForm.disabled = false;
+      console.log('Button is now valid and disabled')
     } else {
       buttonValidForm.classList.remove("valid");
       buttonValidForm.disabled = true;
+      
     }
   });
 }
